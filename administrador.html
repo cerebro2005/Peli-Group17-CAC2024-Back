@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Películas - CAC-Movies</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html">CAC-Movies</a>
+            <a href="./tendencias.html">Tendencias</a>
+            <a href="./registro.html">Registrarse</a>
+            <button id="iniciarSesionBtn">Iniciar Sesión</button>
+        </nav>
+    </header>
+    <main>
+        <section class="gestionPeliculas">
+            <h1>Gestión de películas</h1>
+            <p>En esta sección se podrá llevar a cabo la gestión de las películas del portal</p>
+            <form id="form-peliculas">
+                <div>
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" required>
+                </div>
+                <div>
+                    <label for="fechaLanzamiento">Fecha lanzamiento</label>
+                    <input type="date" id="fechaLanzamiento" name="fechaLanzamiento" required>
+                </div>
+                <div>
+                    <label for="genero">Género</label>
+                    <input type="text" id="genero" name="genero" required>
+                </div>
+                <div>
+                    <label for="duracion">Duración</label>
+                    <input type="number" id="duracion" name="duracion" required>
+                </div>
+                <div>
+                    <label for="director">Director</label>
+                    <input type="text" id="director" name="director" required>
+                </div>
+                <div>
+                    <label for="reparto">Reparto</label>
+                    <input type="text" id="reparto" name="reparto" required>
+                </div>
+                <div>
+                    <label for="sinopsis">Sinopsis</label>
+                    <textarea id="sinopsis" name="sinopsis" required></textarea>
+                </div>
+                <div>
+                    <label for="imagen">Imagen</label>
+                    <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                </div>
+                <button type="submit">Agregar Película</button>
+            </form>
+            <h2>Listado de Películas</h2>
+            <div id="listaPeliculas"></div>
+        </section>
+    </main>
+    <script src="../js/administrador.js"></script>
+</body>
+</html>

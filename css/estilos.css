@@ -840,3 +840,97 @@ hr{
     margin: 0 auto;
     margin-top: 40px;
 }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #8B0000;
+    padding: 10px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+header nav button {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+header nav button:hover {
+    background-color: #333;
+}
+
+main {
+    padding: 20px;
+}
+
+.gestionPeliculas {
+    max-width: 800px;
+    margin: auto;
+}
+
+.gestionPeliculas form div {
+    margin-bottom: 15px;
+}
+
+.gestionPeliculas form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.gestionPeliculas form input,
+.gestionPeliculas form textarea,
+.gestionPeliculas form button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.gestionPeliculas form button {
+    background-color: #006400;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.gestionPeliculas form button:hover {
+    background-color: #008000;
+}
+
+.pelicula-item {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #222;
+    border-radius: 5px;
+}
+
+.pelicula-item img {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.pelicula-item .detallesPelicula {
+    flex-grow: 1;
+}
+
+.pelicula-item .detallesPelicula h3 {
+    margin-top: 0;
+}
+
+.pelicula-item .detallesPelicula p {
+    margin: 5px 0;
+}

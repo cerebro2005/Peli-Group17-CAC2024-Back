@@ -44,22 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return isValid;
     };
-    // recibe el id del campo y el mensaje de error y valida si el campo está vacío
+
     const validateField = (fieldId, errorMessage) => {
-        const field = document.getElementById(fieldId);// levanta el elemento por su id
-        const value = field.value.trim(); // al value se le quitan los espacios en blanco al principio y al final
-        //valida si el campo está vacío
+        const field = document.getElementById(fieldId);
+        const value = field.value.trim();
         if (value === '') {
-            //invoca la función setErrorFor y le pasa el campo y el mensaje de error
             setErrorFor(field, errorMessage);
             return false;
         } else {
-            //invoca la función setSuccessFor y le pasa el campo
             setSuccessFor(field);
             return true;
         }
     };
-    // recibe el campo y el mensaje de error y valida si el campo está vacío o si el email no es válido
+
     const validateEmailField = (fieldId, errorMessage) => {
         const field = document.getElementById(fieldId);
         const email = field.value.trim();
@@ -75,32 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // recibe el campo y el mensaje de error y agrega la clase error al div padre del campo y muestra el mensaje de error
     const setErrorFor = (input, message) => {
-        // Obtiene el div padre del campo
         const formControl = input.closest('div');
-        //levanta por su clase el elemento que contiene el mensaje de error
         const errorText = formControl.querySelector('.error-text');
-        //agrega la clase error al div padre del campo
         formControl.classList.add('error');
-        //muestra el mensaje de error
         errorText.innerText = message;
-        //pone el foco en el campo
         input.focus();
     };
-    
-    // recibe el campo y elimina la clase error del div padre del campo y el mensaje de error
+
     const setSuccessFor = (input) => {
-        // Obtiene el div padre del campo
         const formControl = input.closest('div');
-        //quita la clase error al div padre del campo
         formControl.classList.remove('error');
-        //levanta por su clase el elemento que contiene el mensaje de error
         const errorText = formControl.querySelector('.error-text');
-        //elimina el mensaje de error
         errorText.innerText = '';
     };
-    // funcion que valida si es un mail valido con una expresion regular
+
     const isEmail = (email) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);

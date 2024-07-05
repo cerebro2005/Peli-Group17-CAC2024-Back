@@ -456,37 +456,29 @@ body{
 
 /*ESTILOS ESCRITORIO FOOTER*/
 .footer{
-    padding:20px;
     background-color:#9f3647;
     color:#ffffff;
-    height: 18vh;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    gap:20px;
-    .navegacion{
+    .listaNav{
+        list-style: none;
         display: flex;
-        justify-content: center;
         align-items: center;
-        .listaNav{
-            list-style: none;
-            display: flex;
-            align-items: center;
-            .listaItem{
-                margin-left:20px;
-                .linkNav{
-                    text-decoration: none;
-                    color:#ffffff;
-                    font-weight: 700;
-                    font-size: 1.2rem;
-                }
-                .administradorPeliculas{
-                    background-color: #181419;
-                    color: white;
-                    padding: 0.5rem 1rem;
-                    border-radius: 5px;
-                }
+        .listaItem{
+            margin-left:20px;
+            .linkNav{
+                text-decoration: none;
+                color:#ffffff;
+                font-weight: 700;
+                font-size: 1.2rem;
+            }
+            .administradorPeliculas{
+                background-color: #181419;
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
             }
         }
     }
@@ -496,9 +488,6 @@ body{
         right: 20px;
         color: white;
         cursor: pointer;
-    }
-    .aportes,.video{
-        font-size: 14px;
     }
 }
 /*ESTILOS FOOTER CELULAR Y TABLET CHICA*/

@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Selecciona el formulario en el DOM
     const form = document.querySelector('form');
+
     // Agrega un evento de escucha para cuando se envía el formulario
     form.addEventListener('submit', (event) => {
         // Si la validación del formulario no es exitosa
@@ -20,22 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función para validar todo el formulario
     const validateForm = () => {
         let isValid = true;
-        isValid = validateEmailField('email', 'El correo electrónico no es válido') && isValid; // Validar campo de email
-        isValid = validateField('password', 'La contraseña es obligatoria') && isValid; // Validar campo de contraseña
+
+        // Validar campo de email
+        isValid = validateEmailField('email', 'El correo electrónico no es válido') && isValid;
+
+        // Validar campo de contraseña
+        isValid = validateField('password', 'La contraseña es obligatoria') && isValid;
+
         return isValid;
     };
 
     // Función para validar un campo específico
     const validateField = (fieldId, errorMessage) => {
-        const field = document.getElementById(fieldId); // Obtiene el elemento del campo mediante su ID
-        const value = field.value.trim();  // Obtiene el valor del campo y elimina los espacios en blanco al principio y al final
+        // Obtiene el elemento del campo mediante su ID
+        const field = document.getElementById(fieldId);
+        // Obtiene el valor del campo y elimina los espacios en blanco al principio y al final
+        const value = field.value.trim();
         // Si el valor del campo está vacío
         if (value === '') {
-            setErrorFor(field, errorMessage);  // Establece un mensaje de error para el campo
-            return false; // Devuelve false indicando que la validación ha fallado
+            // Establece un mensaje de error para el campo
+            setErrorFor(field, errorMessage);
+            // Devuelve false indicando que la validación ha fallado
+            return false;
         } else {
-           setSuccessFor(field); // Si el valor del campo no está vacío, elimina cualquier mensaje de error anterior
-           return true; // Devuelve true indicando que la validación ha tenido éxito
+            // Si el valor del campo no está vacío, elimina cualquier mensaje de error anterior
+            setSuccessFor(field);
+            // Devuelve true indicando que la validación ha tenido éxito
+            return true;
         }
     };
 

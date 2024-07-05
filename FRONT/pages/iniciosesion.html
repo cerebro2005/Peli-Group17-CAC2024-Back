@@ -20,15 +20,15 @@
     <main id="main" class="main">
         <section data-aos="zoom-in" data-aos-duration="1000" class="seccionRegistrarse">
             <!--pongo get ya que en github pages da error el method post-->
-            <form id="form" action="" method="get">
+            <form action="" method="get">
                 <h2 class="tituloRegistrarse">Iniciar Sesión</h2>
                 <div>
                     <input type="email" placeholder="Email" id="email" name="email">
-                    <div id="error-email" class="error-text"></div>
+                    <div class="error-text"></div>
                 </div>
                 <div>
                     <input type="password" placeholder="Contraseña" id="password" name="password">
-                    <div id="error-password" class="error-text"></div>
+                    <div class="error-text"></div>
                 </div>
                 <div>
                     <input class="boton" type="submit" value="Iniciar Sesión">
@@ -43,6 +43,6 @@
     <script>
         AOS.init();
     </script>
-    <script src="../js/valida_simple_inicio.js"></script>
+    <script src="../js/valida_iniciosesion.js"></script>
 </body>
 </html>

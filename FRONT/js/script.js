@@ -19,54 +19,84 @@ document.addEventListener('DOMContentLoaded', () => {
             peliculas.forEach(pelicula => {
                 const tr = document.createElement('tr'); // Crea una nueva fila en la tabla
                 tr.innerHTML = `
+                    <td>${pelicula.id}</td>
                     <td>${pelicula.titulo}</td>
                     <td>${pelicula.lanzamiento}</td>
                     <td>${pelicula.genero}</td>
                     <td>${pelicula.duracion}</td>
-                    <td>${pelicula.director}</td>
-                    <td>${pelicula.actores}</td>
                     <td><img width="150px" src="${pelicula.imagen}" alt="${pelicula.titulo}"></td>
+                    <td>
+                        <button class="btn btn-sm btn-warning" id="edit-${pelicula.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger" id="delete-${pelicula.id}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
                 `; // Se rellena la fila con los datos de la película
-                // la sinopsis de la pelicula no se muestra en el listado ya que esta puede ser muy larga
-                //<td>${pelicula.sinopsis}</td>
+
                 bodyTablePeliculas.appendChild(tr); // Añade la fila al cuerpo de la tabla
+
+                // Añade el evento click al botón de modificar
+                document.getElementById(`edit-${pelicula.id}`).addEventListener('click', () => {
+                    // Aquí puedes solicitar los nuevos datos al usuario, por ejemplo, con un formulario
+                    const nuevosDatos = {
+                        titulo: prompt("Nuevo título:", pelicula.titulo),
+                        lanzamiento: prompt("Nuevo lanzamiento:", pelicula.lanzamiento),
+                        genero: prompt("Nuevo género:", pelicula.genero),
+                        duracion: prompt("Nueva duración:", pelicula.duracion),
+                        director: prompt("Nuevo director:", pelicula.director),
+                        actores: prompt("Nuevos actores:", pelicula.actores),
+                        sinopsis: prompt("Nueva sinopsis:", pelicula.sinopsis),
+                        imagen: prompt("Nueva URL de la imagen:", pelicula.imagen)
+                    };
+
+                    fetch(SERVIDOR_API, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            accion: 'modificar',
+                            id: pelicula.id,
+                            ...nuevosDatos
+                        })
+                    }).then(response => response.json())
+                    .then(data => {
+                        console.log('Película modificada:', data);
+                        // Aquí puedes añadir código adicional para manejar la respuesta
+                        // Por ejemplo, puedes actualizar la fila en la tabla con los nuevos datos
+                    }).catch(error => {
+                        console.error('Error al modificar la película:', error);
+                    });
+                });
+
+                // Añade el evento click al botón de eliminar
+                document.getElementById(`delete-${pelicula.id}`).addEventListener('click', () => {
+                    fetch(SERVIDOR_API, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            accion: 'eliminar',
+                            id: pelicula.id
+                        })
+                    }).then(response => response.json())
+                    .then(data => {
+                        console.log('Película eliminada:', data);
+                        // Aquí puedes añadir código adicional para manejar la respuesta
+                        // Por ejemplo, puedes eliminar la fila de la tabla
+                        tr.remove();
+                    }).catch(error => {
+                        console.error('Error al eliminar la película:', error);
+                    });
+                });
             });
         } catch (error) {
             console.log('Error al obtener las películas:', error); // Muestra un mensaje de error en la consola si ocurre algún problema
         }
     };
 
-    // Evento que se dispara al enviar el formulario
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Previene que el formulario se envíe de manera predeterminada (es decir, que recargue la página)
-        const titulo = document.getElementById('titulo').value; // Obtiene el valor del campo título
-        const lanzamiento = document.getElementById('lanzamiento').value; // Obtiene el valor del campo lanzamiento
-        const genero = document.getElementById('genero').value; // Obtiene el valor del campo género
-        const duracion = document.getElementById('duracion').value; // Obtiene el valor del campo duración
-        const director = document.getElementById('director').value; // Obtiene el valor del campo director
-        const actores = document.getElementById('actores').value; // Obtiene el valor del campo actores
-        const sinopsis = document.getElementById('sinopsis').value; // Obtiene el valor del campo sinopsis
-        const imagen = document.getElementById('imagen').value; // Obtiene el valor del campo imagen
-
-        // Realiza una solicitud POST a la API para añadir una nueva película
-        try {
-            const response = await fetch(SERVIDOR_API, {
-                method: 'POST', // Indica que la solicitud es de tipo POST
-                headers: {
-                    'Content-Type': 'application/json' // Establece el tipo de contenido como JSON
-                },
-                body: JSON.stringify({ titulo, lanzamiento, genero, duracion, director, actores, sinopsis, imagen }) // Convierte los datos del formulario a JSON
-            });
-
-            if (!response.ok) throw new Error('La respuesta de la red no fue satisfactoria'); // Si la respuesta no es satisfactoria, lanza un error
-            const result = await response.json(); // Convierte la respuesta en un objeto JSON
-            alert(result.message); // Muestra un mensaje de alerta con el resultado
-            fetchPeliculas(); // Vuelve a obtener y mostrar las películas
-            form.reset(); // Reinicia el formulario para que quede vacío
-        } catch (error) {
-            console.log('Error al enviar el formulario:', error); // Muestra un mensaje de error en la consola si ocurre algún problema
-        }
-    });
-
-    fetchPeliculas(); // Obtiene y muestra las películas cuando la página se carga
+    fetchPeliculas(); // Llama a la función para obtener las películas del servidor
 });

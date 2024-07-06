@@ -28,27 +28,71 @@ switch ($method) {
     case 'POST':
         $data = json_decode(file_get_contents('php://input'), true); // Decodifica el JSON recibido en un array asociativo
 
-        // Verifica si los campos necesarios no están vacíos
-        if (!empty($data['titulo']) && !empty($data['lanzamiento']) && !empty($data['genero']) && !empty($data['duracion']) && !empty($data['director']) && !empty($data['actores']) && !empty($data['sinopsis']) && !empty($data['imagen'])) {
-            // Escapa caracteres especiales en las entradas para prevenir inyecciones SQL
-            $titulo = $conn->real_escape_string($data['titulo']);
-            $lanzamiento = $conn->real_escape_string($data['lanzamiento']);
-            $genero = $conn->real_escape_string($data['genero']);
-            $duracion = $conn->real_escape_string($data['duracion']);
-            $director = $conn->real_escape_string($data['director']);
-            $actores = $conn->real_escape_string($data['actores']);
-            $sinopsis = $conn->real_escape_string($data['sinopsis']);
-            $imagen = $conn->real_escape_string($data['imagen']);
+        if (isset($data['accion'])) {
+            $accion = $data['accion'];
 
-            // Consulta SQL para insertar una nueva película
-            $sql = "INSERT INTO pelicula (titulo, lanzamiento, genero, duracion, director, actores, sinopsis, imagen) VALUES ('$titulo', '$lanzamiento', '$genero', '$duracion', '$director', '$actores', '$sinopsis', '$imagen')";
-            if ($conn->query($sql) === TRUE) { // Verifica si la consulta de inserción se ejecutó correctamente
-                echo json_encode(["message" => "Película añadida con éxito"]); // Devuelve un mensaje de éxito
-            } else {
-                echo json_encode(["message" => "Error: " . $conn->error]); // Devuelve un mensaje de error si la consulta falla
+            switch ($accion) {
+                case 'modificar':
+                    if (!empty($data['id']) && !empty($data['titulo']) && !empty($data['lanzamiento']) && !empty($data['genero']) && !empty($data['duracion']) && !empty($data['director']) && !empty($data['actores']) && !empty($data['sinopsis']) && !empty($data['imagen'])) {
+                        $id = $conn->real_escape_string($data['id']);
+                        $titulo = $conn->real_escape_string($data['titulo']);
+                        $lanzamiento = $conn->real_escape_string($data['lanzamiento']);
+                        $genero = $conn->real_escape_string($data['genero']);
+                        $duracion = $conn->real_escape_string($data['duracion']);
+                        $director = $conn->real_escape_string($data['director']);
+                        $actores = $conn->real_escape_string($data['actores']);
+                        $sinopsis = $conn->real_escape_string($data['sinopsis']);
+                        $imagen = $conn->real_escape_string($data['imagen']);
+
+                        $sql = "UPDATE pelicula SET titulo='$titulo', lanzamiento='$lanzamiento', genero='$genero', duracion='$duracion', director='$director', actores='$actores', sinopsis='$sinopsis', imagen='$imagen' WHERE id='$id'";
+                        if ($conn->query($sql) === TRUE) {
+                            echo json_encode(["message" => "Película modificada con éxito"]);
+                        } else {
+                            echo json_encode(["message" => "Error: " . $conn->error]);
+                        }
+                    } else {
+                        echo json_encode(["message" => "Datos incompletos para la modificación"]);
+                    }
+                    break;
+
+                case 'eliminar':
+                    if (!empty($data['id'])) {
+                        $id = $conn->real_escape_string($data['id']);
+                        $sql = "DELETE FROM pelicula WHERE id='$id'";
+                        if ($conn->query($sql) === TRUE) {
+                            echo json_encode(["message" => "Película eliminada con éxito"]);
+                        } else {
+                            echo json_encode(["message" => "Error: " . $conn->error]);
+                        }
+                    } else {
+                        echo json_encode(["message" => "ID no proporcionado para la eliminación"]);
+                    }
+                    break;
+
+                default:
+                    echo json_encode(["message" => "Acción no soportada"]);
+                    break;
             }
         } else {
-            echo json_encode(["message" => "Datos incompletos"]); // Devuelve un mensaje de error si faltan datos
+            if (!empty($data['titulo']) && !empty($data['lanzamiento']) && !empty($data['genero']) && !empty($data['duracion']) && !empty($data['director']) && !empty($data['actores']) && !empty($data['sinopsis']) && !empty($data['imagen'])) {
+                $titulo = $conn->real_escape_string($data['titulo']);
+                $lanzamiento = $conn->real_escape_string($data['lanzamiento']);
+                $genero = $conn->real_escape_string($data['genero']);
+                $duracion = $conn->real_escape_string($data['duracion']);
+                $director = $conn->real_escape_string($data['director']);
+                $actores = $conn->real_escape_string($data['actores']);
+                $sinopsis = $conn->real_escape_string($data['sinopsis']);
+                $imagen = $conn->real_escape_string($data['imagen']);
+
+                $sql = "INSERT INTO pelicula (titulo, lanzamiento, genero, duracion, director, actores, sinopsis, imagen) VALUES ('$titulo', '$lanzamiento', '$genero', '$duracion', '$director', '$actores', '$sinopsis', '$imagen')";
+                if ($conn->query($sql) === TRUE) {
+                    echo json_encode(["message" => "Película añadida con éxito"]);
+                } else {
+                    echo json_encode(["message" => "Error: " . $conn->error]);
+                }
+            } else {
+                echo json_encode(["message" => "Datos incompletos para añadir"]);
+            }
         }
         break;
 
@@ -58,4 +102,3 @@ switch ($method) {
 }
 
 $conn->close(); // Cierra la conexión a la base de datos
-?>

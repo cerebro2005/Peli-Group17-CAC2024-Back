@@ -33,35 +33,43 @@
             <!-- Formulario para dar de alta una pelicula nueva-->
 
             <form action="" method="post" enctype="multipart/form-data" class="row row-cols-lg-auto g-3 align-items-center">
-                <div class="col-12 col-md-4">
-                    <label for="titulo">Titulo</label>
-                    <input class="form-control" type="text" name="titulo" id="titulo">
+                <div class="col-12 col-md-6">
+                    <label for="titulo">Título</label>
+                    <input class="form-control" type="text" name="titulo" id="titulo" required>
                 </div>
-                <div class="col-4 col-md-3">
-                    <label for="fecha">Fecha lanzamiento</label>
-                    <input class="form-control" type="date" name="fecha" id="fecha">
-                </div>
-                <div class="col-6 col-md-3">
-                    <label for="genero">Genero</label>
-                    <input class="form-control" type="text" name="genero" id="genero">
-                </div>
-                <div class="col-2 col-md-2">
-                    <label for="duracion">Duración</label>
-                    <input class="form-control" type="text" name="duracion" id="duracion">
+                <div class="col-12 col-md-2">
+                    <label for="lanzamiento">Lanzamiento</label>
+                    <input class="form-control" type="date" name="lanzamiento" id="lanzamiento">
                 </div>
                 <div class="col-6 col-md-4">
-                    <label for="director">Director</label>
+                    <label for="genero">Género</label>
+                    <select class="form-control form-select" name="genero" id="genero">
+                        <option value="" selected disabled>Selecciona un género</option>
+                        <option value="accion">Acción</option>
+                        <option value="comedia">Comedia</option>
+                        <option value="drama">Drama</option>
+                        <option value="ciencia ficcion">Ciencia Ficción</option>
+                        <option value="terror">Terror</option>
+                        <option value="otro">Otro...</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-2">
+                    <label for="duracion">Duración</label>
+                    <input class="form-control" type="time" name="duracion" id="duracion" step="1">
+                </div>
+                <div class="col-12 col-md-5">
+                    <label for="director">Director/es</label>
                     <input class="form-control" type="text" name="director" id="director">
                 </div>
-                <div class="col-12 col-md-8">
-                    <label for="reparto">Reparto</label>
-                    <input class="form-control" type="text" name="reparto" id="reparto">
+                <div class="col-12 col-md-5">
+                    <label for="actores">Actor/es</label>
+                    <input class="form-control" type="text" name="actores" id="actores">
                 </div>
-                <div class="col-12">
+                <div class="col-12 col-md-12">
                     <label for="sinopsis">Sinopsis</label>
-                    <textarea class="form-control" name="sinopsis" id="sinopsis" cols="30" rows="3"></textarea>
+                    <textarea class="form-control" name="sinopsis" id="sinopsis" rows="2"></textarea>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-6 col-md-5">
                     <label for="imagen">Imagen</label>
                     <input class="form-control" type="file" name="imagen" id="imagen">
                 </div>

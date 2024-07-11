@@ -1,0 +1,51 @@
+/* Estilos para el modal */
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed;
+    top: 50%; /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Centrar completamente */
+    z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    width: 80%; /* Ancho del modal */
+    max-width: 600px; /* Ancho máximo del modal */
+    padding: 20px; /* Espaciado interno */
+    border-radius: 10px; /* Bordes redondeados */
+    color: white; /* Color del texto */
+}
+
+.modal-content {
+    background-color: #333333; /* Color de fondo del modal */
+    padding: 20px; /* Espaciado interno del contenido */
+    border-radius: 10px; /* Bordes redondeados del contenido */
+}
+
+.close {
+    color: white; /* Color del botón de cerrar */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Estilos para los botones del modal */
+.modal-content button {
+    background-color: #9f3647;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Estilos para el botón de guardar */
+.modal-content button.save {
+    background-color: #4CAF50; /* Color verde */
+}
+
+/* Estilos para el botón de cancelar */
+.modal-content button.cancel {
+    background-color: #f44336; /* Color rojo */
+}
